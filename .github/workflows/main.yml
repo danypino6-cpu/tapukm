@@ -19,12 +19,10 @@ jobs:
           pip install --upgrade pip
           pip install Cython==0.29.33 buildozer
 
-      - name: Build with Buildozer
+     - name: Build with Buildozer
         run: |
-          yes | buildozer android debug
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: Mi-App-Instalable
-          path: bin/*.apk
+          # Forzamos la aceptación de licencias antes de empezar
+          mkdir -p ~/.android
+          touch ~/.android/repositories.cfg
+          # Ejecutamos con "yes" para todas las preguntas
+          yes | buildozer -v android debug
