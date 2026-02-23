@@ -5,7 +5,7 @@ package.domain = org.tuusuario
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,db,csv
 # REQUERIMIENTOS CORREGIDOS PARA TU CÓDIGO:
-requirements = python3,kivy==2.3.0,kivymd==1.1.1,sqlite3,csv
+requirements = requirements = python3,kivy==2.3.0,kivymd==1.1.1,sdl2_ttf==2.0.15,sqlite3,csv
 
 orientation = portrait
 fullscreen = 1
