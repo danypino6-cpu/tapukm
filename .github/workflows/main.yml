@@ -19,17 +19,9 @@ jobs:
           pip install --upgrade pip
           pip install Cython==0.29.33 buildozer
 
-      - name: Force Accept Android Licenses
-        run: |
-          # Instalamos las herramientas de línea de comandos de Android manualmente para aceptar licencias
-          sudo apt-get install -y android-sdk
-          yes | sdkmanager --licenses || true
-          mkdir -p ~/.android
-          touch ~/.android/repositories.cfg
-
       - name: Build with Buildozer
         run: |
-          # Usamos un comando que limpia antes de empezar para evitar el error 100
+          # Limpiamos todo rastro del error 100 anterior
           buildozer android clean
           yes | buildozer -v android debug
         env:
@@ -38,5 +30,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Mi_APK_Instalable
+          name: App_Con_BaseDatos
           path: bin/*.apk
