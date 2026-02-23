@@ -1,16 +1,23 @@
-name: Crear Mi APK
-on: [push]
+name: Build APK
+on: [push, workflow_dispatch]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # Esta es la acción oficial y actualizada
       - name: Buildozer Action
-        uses: ArtemSerebrenninkov/buildozer-action@v1
+        uses: kivy/buildozer-action@v1
         with:
+          buildozer_version: master
+          python_version: 3.11
           command: buildozer android debug
-      - name: Subir APK terminada
+          repository_display_name: "Mi App"
+
+      - name: Subir APK
         uses: actions/upload-artifact@v4
         with:
-          name: Mi_Aplicacion_Instalable
+          name: Mi_App_Instalable
           path: bin/*.apk
