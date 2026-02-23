@@ -19,21 +19,24 @@ jobs:
           pip install --upgrade pip
           pip install Cython==0.29.33 buildozer
 
-      - name: Setup Android SDK License
+      - name: Force Accept Android Licenses
         run: |
+          # Instalamos las herramientas de línea de comandos de Android manualmente para aceptar licencias
+          sudo apt-get install -y android-sdk
+          yes | sdkmanager --licenses || true
           mkdir -p ~/.android
           touch ~/.android/repositories.cfg
 
       - name: Build with Buildozer
         run: |
-          # El comando 'yes' es vital para el error 100
+          # Usamos un comando que limpia antes de empezar para evitar el error 100
+          buildozer android clean
           yes | buildozer -v android debug
         env:
-          # Esto fuerza a usar el linker moderno para evitar errores de compilación
           LDFLAGS: "-fuse-ld=lld"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Mi_APK_Lista
+          name: Mi_APK_Instalable
           path: bin/*.apk
