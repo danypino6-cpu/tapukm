@@ -12,17 +12,28 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
           sudo apt update
-          sudo apt install -y git zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+          sudo apt install -y git zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev openjdk-17-jdk lld
           pip install --upgrade pip
           pip install Cython==0.29.33 buildozer
 
-     - name: Build with Buildozer
+      - name: Setup Android SDK License
         run: |
-          # Forzamos la aceptación de licencias antes de empezar
           mkdir -p ~/.android
           touch ~/.android/repositories.cfg
-          # Ejecutamos con "yes" para todas las preguntas
+
+      - name: Build with Buildozer
+        run: |
+          # El comando 'yes' es vital para el error 100
           yes | buildozer -v android debug
+        env:
+          # Esto fuerza a usar el linker moderno para evitar errores de compilación
+          LDFLAGS: "-fuse-ld=lld"
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mi_APK_Lista
+          path: bin/*.apk
