@@ -1,1 +1,66 @@
-[app]# (str) TÌtulo de tu aplicaciÛntitle = MiAppPydroid# (str) Nombre del paquetepackage.name = miapptest# (str) Dominio del paquete (puedes dejar este)package.domain = org.test# (str) Directorio donde est· el main.py (punto significa el mismo lugar)source.dir = .# (list) Extensiones de archivos a incluirsource.include_exts = py,png,jpg,kv,atlas# (list) Requerimientos (AQUÕ PON LAS LIBRERÕAS QUE USAS)# Si usas KivyMD c·mbialo a: python3,kivy==2.3.0,kivymd,requestsrequirements = python3,kivy==2.3.0# (str) OrientaciÛn (landscape, sensorLandscape, portrait o all)orientation = portrait# (bool) Indicar si la aplicaciÛn debe ser a pantalla completafullscreen = 1# (int) Android API a usar (Usa 33 para GitHub Actions)android.api = 33# (int) MÌnimo Android SDK permitidoandroid.minapi = 21# (str) Arquitectura de Android (GitHub soporta arm64-v8a perfectamente)android.archs = arm64-v8a# (bool) Aceptar autom·ticamente las licencias del SDKandroid.accept_sdk_license = True# (str) Formato de la APKandroid.release_artifact = apk[buildozer]# (int) Nivel de log (2 para ver errores detallados)log_level = 2# (str) Rama de python-for-android a usarp4a.branch = master
+[app]
+
+# (str) T√≠tulo de tu aplicaci√≥n
+title = MiAppPydroid
+
+# (str) Nombre del paquete
+package.name = miapptest
+
+# (str) Dominio del paquete (puedes dejar este)
+package.domain = org.test
+
+# (str) Directorio donde est√° el main.py
+source.dir = .
+
+# (list) Extensiones de archivos a incluir
+source.include_exts = py,png,jpg,kv,atlas
+
+# (list) Requerimientos de la aplicaci√≥n
+# IMPORTANTE: Si usas KivyMD a√±ade ",kivymd" al final sin espacios
+requirements = python3,kivy==2.3.0
+
+# (str) Orientaci√≥n de la pantalla
+orientation = portrait
+
+# (bool) Indicar si la aplicaci√≥n debe ser a pantalla completa
+fullscreen = 1
+
+# =================================================
+# CONFIGURACI√ìN DE ANDROID (CR√çTICO)
+# =================================================
+
+# (int) API de Android que se usar√° (33 es el est√°ndar actual)
+android.api = 33
+
+# (int) M√≠nimo API soportado (Android 5.0)
+android.minapi = 21
+
+# (str) Versi√≥n del NDK de Android
+android.ndk = 25b
+
+# (bool) Aceptar licencias autom√°ticamente (Evita el Error 100)
+android.accept_sdk_license = True
+
+# (str) Arquitectura (arm64-v8a es para celulares modernos)
+android.archs = arm64-v8a
+
+# (str) Formato de salida
+android.release_artifact = apk
+
+# (bool) Ocultar la barra de estado
+android.skip_update = False
+
+# =================================================
+# CONFIGURACI√ìN DE BUILDOZER
+# =================================================
+
+[buildozer]
+
+# (int) Nivel de log (2 para ver errores detallados)
+log_level = 2
+
+# (int) Tiempo de espera antes de error
+warn_on_root = 1
+
+# (str) Rama de python-for-android a usar
+p4a.branch = master
